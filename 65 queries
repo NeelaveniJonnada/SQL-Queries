@@ -1,0 +1,20 @@
+1. select * from employee;
+
+2.select name,salary from employee;
+
+3.select * from employee where age > 30;
+
+4.select name from department;
+
+5.select name from employee where department_id = 1;
+
+6.select name from employee where name like 'J%';
+7.select name from employee where name like '%e';
+
+8.select name from employee where name like '%a%';
+
+9.select name from employee where length(name) = 9;
+
+10.select name from employee where name like '_o%';
+
+11.
