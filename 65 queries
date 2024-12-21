@@ -9,6 +9,7 @@
 5.select name from employee where department_id = 1;
 
 6.select name from employee where name like 'J%';
+
 7.select name from employee where name like '%e';
 
 8.select name from employee where name like '%a%';
@@ -17,4 +18,92 @@
 
 10.select name from employee where name like '_o%';
 
-11.
+11.select name from employee where hire_date >= '2020-01-01' and hire_date < '2021-01-01';
+
+12.select name from employee where month(hire_date) = '01';
+
+13.select name from employee where year(hire_date) < '2019';
+
+14.select name from employee where hire_date >= '2021-03-01'; 
+
+15.select name from employee where hire_date;
+
+16.select sum(salary) from employee;
+
+17.select avg(salary) from employee;
+
+18.select min(salary) from employee;
+
+19.select count(name) from employee group by department_id;
+
+20.select avg(salary) from employee group by department_id;
+
+21.select sum(salary) from employee group by department_id;
+
+22.select avg(age) from employee group by department_id;
+
+23.select count(name) from employee group by year(hire_date); 
+
+24.select max(salary) from employee group by department_id;
+
+25.select max(avg_salary) from (select avg(salary) as avg_salary from employee group by department_id);
+
+26.select department_id,count(emp_id) as count from employee group by department_id having count > 2;
+
+27.select department_id,avg(salary) as count from employee group by department_id having count > 55000;
+
+28.select year(hire_date) as hired_year from employee group by hired_year having count(emp_id) > 1;
+
+29.select department_id from employee group by department_id having sum(salary) < 100000;
+
+30.select department_id from employee group by department_id having max(salary) > 75000;
+
+31.select name from employee order by salary asc;
+
+32.select name from employee order by age desc;
+
+33.select name from employee order by hire_date asc;
+
+34.select name from employee order by department_id, salary;
+
+35.select department_id from employee group by department_id order by sum(salary);
+
+36.select employee.name,department.name from employee inner join department on employee.department_id=department.department_id;
+
+37.select project.name,department.name from department inner join project on department.department_id = project.department_id;
+
+38.select employee.name,project.name from employee inner join project on employee.department_id = project.department_id;
+
+39.select employee.name,department.name from employee left join department on employee.department_id=department.department_id;
+
+40.select employee.name,department.name from employee right join department on employee.department_id=department.department_id;
+
+41.select employee.name from employee left join project on employee.department_id = project.department_id where project_id is NULL;
+
+42.select emp_id,count(project_id) as pnum from employee inner join project on employee.department_id = project.department_id group by project.department_id,employee.emp_id;
+
+43.select department.department_id,department.name from department left join employee on department.department_id = employee.department_id where employee.emp_id = NULL;
+
+44.select employee.name from employee inner join department on employee.department_id = department.department_id where department.department_id  = (select department_id from employee where name = 'John Doe');
+
+45.select department.department_id,department.name,avg(salary) as average_salary from department inner join employee on department.department_id=employee.department_id group by department.department_id,department.name ORDER BY average_salary desc limit 1;
+
+46.select name,salary from employee where salary = (select max(salary) from employee);
+
+47.select name,salary from employee where salary > (select avg(salary) from employee);
+
+48.select max(salary) as secsalary from employee where salary < (select max(salary) from employee);
+
+49.select department.name,count(emp_id) from employee inner join department on employee.department_id = department.department_id group by department.name order by count(emp_id) desc limit 1; 
+
+50.select e.name, e.salary, d.department_name from employee e join department d ON e.department_id = d.department_id where e.salary > ( select avg(e1.salary) from employee e1 where e1.department_id= =e.department_id);
+
+51.select salary from employee order by salary desc limit 1 offset 2;
+
+52.select name from employee where age > (select max(age) from employee where department_id = 2);
+
+53.select department.name from department left join employee on department.department_id = employee.department_id having avg(salary) > 55000;
+
+54.select employee.name from employee join (select department_id from project group by department_id having count(project_id) >= 2) department on employee.department_id = department.department_id;
+
+55.select name from employee where hire_date = (select hire_date from employee where name = 'Jane Smith');
